@@ -1,0 +1,19 @@
+﻿<Window x:Class="InsertionImagesOffice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="200" Width="400">
+    <Grid>
+        <Grid Column="0">
+            <TextBlock Text="Please specify a file to be inserted :" Height="20" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Button Content="Browse..." Command="{Binding OpenFileDialogCommand}"  Margin="0,10,10,0" Width="80" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+            <TextBlock Text="{Binding FilePath}" Margin="10,40,0,0" Height="20" VerticalAlignment="Top"/>
+
+            <TextBlock Text="Open with :" Height="20" Margin="10,80,0,0" VerticalAlignment="Top"/>
+            <Button Content="Outlook" Command="{Binding OpenWithOutlookCommand}" IsEnabled="{Binding ButtonIsEnabled}" Margin="45,100,0,0" Width="80" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Button Content="Word" Command="{Binding OpenWithWordCommand}" IsEnabled="{Binding ButtonIsEnabled}" Margin="135,100,0,0" Width="80" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        </Grid>
+    </Grid>
+</Window>
