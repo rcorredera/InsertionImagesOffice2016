@@ -80,8 +80,6 @@ namespace InsertionImagesOffice.ViewModel
             }
         }
 
-
-
         public void OpenWithOutlook(object args)
         {
             Outlook.Start(FilePath);
