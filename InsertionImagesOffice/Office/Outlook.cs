@@ -7,10 +7,18 @@ namespace InsertionImagesOffice.Office
 {
     public sealed class Outlook
     {
+        #region Members
         private static object _missing = Type.Missing;
         private static object _confirmConversion = false;
         private static object _link = false;
         private static object _attachment = false;
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Execute outlook, open a new mail and insert the file.
+        /// </summary>
+        /// <param name="filePath">file to be inserted</param>
         public static void Start(string filePath)
         {
             VstoOutlook.Application outlookApp = new VstoOutlook.Application();
@@ -22,7 +30,8 @@ namespace InsertionImagesOffice.Office
 
                 if (currentItem == null) return;
 
-                Thread t2 = new Thread(() =>
+                //this work has to be async otherwise the mailItem inspector is not accessible.
+                new Thread(() =>
                 {
                     VstoOutlook.MailItem item = currentItem as VstoOutlook.MailItem;
                     if (!currentItem.Sent)
@@ -41,8 +50,7 @@ namespace InsertionImagesOffice.Office
                             Console.WriteLine(ex);
                         }
                     }
-                });
-                t2.Start();
+                }).Start();
             };
 
             VstoOutlook.MailItem mailItem = (VstoOutlook.MailItem)
@@ -50,8 +58,6 @@ namespace InsertionImagesOffice.Office
 
             mailItem.Display();
         }
-
-
-
+        #endregion
     }
 }

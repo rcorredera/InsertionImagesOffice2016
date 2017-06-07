@@ -7,7 +7,15 @@ namespace InsertionImagesOffice.ViewModel
 {
     public class MainWindowViewModel : ObservableObject
     {
+        #region Members
         private bool _buttonIsEnabled;
+        private string _filePath;
+        private RelayCommand<object> _openFileDialogCommand;
+        private RelayCommand<object> _openWithWordCommand;
+        private RelayCommand<object> _openWithOutlookCommand;
+        #endregion
+
+        #region Properties 
         public bool ButtonIsEnabled
         {
             get { return _buttonIsEnabled; }
@@ -21,7 +29,6 @@ namespace InsertionImagesOffice.ViewModel
             }
         }
 
-        private string _filePath;
         public string FilePath
         {
             get { return _filePath; }
@@ -34,8 +41,6 @@ namespace InsertionImagesOffice.ViewModel
                 }
             }
         }
-
-        private RelayCommand<object> _openFileDialogCommand;
 
         public RelayCommand<object> OpenFileDialogCommand
         {
@@ -50,8 +55,6 @@ namespace InsertionImagesOffice.ViewModel
             }
         }
 
-        private RelayCommand<object> _openWithWordCommand;
-
         public RelayCommand<object> OpenWithWordCommand
         {
             get { return _openWithWordCommand; }
@@ -65,8 +68,6 @@ namespace InsertionImagesOffice.ViewModel
             }
         }
 
-        private RelayCommand<object> _openWithOutlookCommand;
-
         public RelayCommand<object> OpenWithOutlookCommand
         {
             get { return _openWithOutlookCommand; }
@@ -79,28 +80,46 @@ namespace InsertionImagesOffice.ViewModel
                 }
             }
         }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Execute outlook with file selected
+        /// </summary>
+        /// <param name="args"></param>
         public void OpenWithOutlook(object args)
         {
             Outlook.Start(FilePath);
         }
 
+        /// <summary>
+        /// Execute word with file selected
+        /// </summary>
+        /// <param name="args"></param>
         public void OpenWithWord(object args)
         {
             Word.Start(FilePath);
         }
 
+        /// <summary>
+        /// Open a file dialog with a html file filter
+        /// </summary>
+        /// <param name="args"></param>
         public void OpenFileDialog(object args)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "HTML files|*.html;*.htm";
+            OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "HTML files|*.html;*.htm" };
             if (openFileDialog.ShowDialog() == true)
             {
                 FilePath = openFileDialog.FileName;
                 ButtonIsEnabled = true;
             }
         }
+        #endregion
 
+        #region Constructor
+        /// <summary>
+        /// Ctor
+        /// </summary>
         public MainWindowViewModel()
         {
             ButtonIsEnabled = false;
@@ -108,5 +127,7 @@ namespace InsertionImagesOffice.ViewModel
             OpenWithOutlookCommand = new RelayCommand<object>(OpenWithOutlook);
             OpenWithWordCommand = new RelayCommand<object>(OpenWithWord);
         }
+        #endregion
+
     }
 }
