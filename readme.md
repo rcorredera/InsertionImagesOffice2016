@@ -1,6 +1,6 @@
 # InsertionImagesOffice
 
-InsertionImagesOffice is an simple tool that will insert in Outlook or Office an html file.
+InsertionImagesOffice is an simple tool that will insert in Outlook or Word an html file.
 
 You can directly download the file from dist directory.
 
